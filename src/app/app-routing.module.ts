@@ -1,16 +1,31 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  }
+    redirectTo: 'enter-chatroom',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/tabs/tabs.module').then((m) => m.TabsPageModule),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'enter-chatroom',
+    loadChildren: () =>
+      import('./features/enter-chatroom/enter-chatroom.module').then(
+        (m) => m.EnterChatroomPageModule
+      ),
+  },
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
