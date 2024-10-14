@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-enter-chatroom',
   templateUrl: './enter-chatroom.page.html',
   styleUrls: ['./enter-chatroom.page.scss'],
 })
-export class EnterChatroomPage implements OnInit {
+export class EnterChatroomPage {
+  form: FormGroup;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    this.form = new FormGroup({
+      username: new FormControl(''),
+    });
   }
-
 }
