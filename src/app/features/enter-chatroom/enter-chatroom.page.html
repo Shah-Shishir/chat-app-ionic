@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true">
   <div class="wrapper">
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="enterChatroom()">
       <ion-input
         label="Username"
         label-placement="stacked"
@@ -15,11 +15,24 @@
       ></ion-input>
       <div class="btn-wrapper">
         <ion-button
+          onKeyUp
           class="ion-margin-top"
-          [disabled]="!this.form.get('username')?.value"
-          >Enter Chatroom</ion-button
+          [disabled]="!this.form.get('username')?.value || loading"
+          (click)="enterChatroom()"
         >
+          <span *ngIf="loading">
+            Opening Chats <ion-spinner></ion-spinner>
+          </span>
+          <span *ngIf="!loading"> Enter Chatroom </span>
+        </ion-button>
       </div>
     </form>
   </div>
+
+  <ion-toast
+    [isOpen]="isToastOpen"
+    [message]="toastMessage"
+    [duration]="1500"
+    (didDismiss)="setOpen(false)"
+  ></ion-toast>
 </ion-content>

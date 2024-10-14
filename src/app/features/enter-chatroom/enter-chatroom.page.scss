@@ -8,12 +8,30 @@
     width: 350px;
 
     .btn-wrapper {
-      width: 50%;
+      width: 55%;
       margin: auto;
 
       ion-button {
+        height: 40px;
+        width: 100%;
         text-transform: capitalize;
+
+        span {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        ion-spinner {
+          width: 22px;
+        }
       }
     }
+  }
+}
+
+::ng-deep {
+  .toast-message {
+    width: 10px;
   }
 }

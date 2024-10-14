@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from './config/guards/auth.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'enter-chatroom',
-    pathMatch: 'full',
-  },
   {
     path: '',
     loadChildren: () =>

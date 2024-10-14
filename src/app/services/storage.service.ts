@@ -4,21 +4,27 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class StorageService {
-  private readonly _storage: Storage | null = null;
-
   public keys = {
+    USER: 'User',
     USERNAME: 'Username',
   };
 
-  public set(key: string, value: any) {
-    this._storage?.setItem(key, value);
+  public set(key: string, value: any): void {
+    localStorage.setItem(
+      key,
+      typeof value === 'string' ? value : JSON.stringify(value)
+    );
   }
 
-  public get(key: string) {
-    return this._storage?.getItem(key);
+  public get(key: string): any {
+    return JSON.parse(localStorage.getItem(key) ?? 'null');
+  }
+
+  public remove(key: string): any {
+    localStorage.removeItem(key);
   }
 
   public clear() {
-    this._storage?.clear();
+    localStorage.clear();
   }
 }

@@ -7,6 +7,7 @@ import { Endpoints } from '../config/endpoints/endpoints';
 
 // Models
 import { User } from '../models/user';
+import { EnterChatroomPayload } from '../models/payloads/enter-chatroom-payload';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ import { User } from '../models/user';
 export class UserService {
   constructor(private readonly http: HttpClient) {}
 
-  enterChatRoom(payload: any): Observable<User> {
+  enterChatRoom(payload: EnterChatroomPayload): Observable<User> {
     return this.http.post<User>(Endpoints.ENTER_CHATROOM, payload);
   }
 
