@@ -21,9 +21,9 @@ export class EnterChatroomPage {
   isToastOpen: boolean = false;
   toastMessage: string = '';
 
-  private userService = inject(UserService);
-  private storageService = inject(StorageService);
-  private router = inject(Router);
+  private readonly userService = inject(UserService);
+  private readonly storageService = inject(StorageService);
+  private readonly router = inject(Router);
 
   constructor() {
     this.form = new FormGroup({
@@ -33,6 +33,7 @@ export class EnterChatroomPage {
 
   enterChatroom(): void {
     this.loading = true;
+    this.form.disable();
 
     const payload: EnterChatroomPayload = {
       username: this.form.get('username')?.value,
@@ -56,6 +57,7 @@ export class EnterChatroomPage {
       },
       error: (err) => {
         this.toastMessage = err.message;
+        this.form.enable();
       },
       complete: () => {
         this.loading = false;
@@ -67,6 +69,4 @@ export class EnterChatroomPage {
   setOpen(isOpen: boolean) {
     this.isToastOpen = isOpen;
   }
-
-  processUser() {}
 }
